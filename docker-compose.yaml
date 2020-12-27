@@ -1,0 +1,65 @@
+version: "3.4"
+
+networks:
+    ldapnet:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 10.0.0.0/24
+
+services:
+    srvldap:
+        image: srvldap
+        build: ./serveur
+        volumes:
+            - "./serveur/config:/etc/ldap"
+            - "./CA:/etc/ldap/CA"
+        ports:
+            - "127.0.0.66:389:389/tcp"
+            - "127.0.0.66:636:636/tcp"
+        networks:
+            ldapnet:
+                ipv4_address: 10.0.0.10
+        depends_on:
+            - dns_secondaire
+        dns: 10.0.0.54
+
+
+    client1:
+        image: client1
+        build: ./client
+        depends_on: [ srvldap ]
+        volumes:
+            - "./CA:/etc/ldap/CA"
+        networks: [ ldapnet ]
+        depends_on:
+            - srvldap
+            - dns_secondaire
+        dns: 10.0.0.54
+
+    dns_primaire:
+        image: dns_primary
+        build:
+            context: ./DNS
+            dockerfile: Dockerfile-primaire
+        ports:
+            - "127.0.0.35:53:53/udp"
+            - "127.0.0.35:53:53/tcp"
+        networks:
+            ldapnet:
+                ipv4_address: 10.0.0.53
+
+    dns_secondaire:
+        image: dns_secondary
+        build:
+            context: ./DNS
+            dockerfile: Dockerfile-secondaire
+        depends_on:
+            - dns_primaire
+        ports:
+            - "127.0.0.36:53:53/udp"
+            - "127.0.0.36:53:53/tcp"
+        networks:
+            ldapnet:
+                ipv4_address: 10.0.0.54

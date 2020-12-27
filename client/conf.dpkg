@@ -1,0 +1,18 @@
+nslcd   nslcd/ldap-bindpw       password admincyberus
+nslcd   nslcd/ldap-binddn       string  cn=admin,dc=cyberus,dc=fr
+nslcd   nslcd/ldap-sasl-realm   string
+nslcd   nslcd/ldap-uris string  ldaps://cyberus.fr/
+nslcd   nslcd/ldap-sasl-authcid string
+nslcd   nslcd/ldap-auth-type    select  simple
+nslcd   nslcd/ldap-sasl-secprops        string
+nslcd   nslcd/ldap-base string  dc=cyberus,dc=fr
+nslcd   nslcd/ldap-sasl-krb5-ccname     string  /var/run/nslcd/nslcd.tkt
+nslcd   nslcd/ldap-reqcert      select  allow
+nslcd   nslcd/ldap-cacertfile   string  /etc/ldap/CA.crt
+nslcd   nslcd/ldap-starttls     boolean false
+nslcd   nslcd/ldap-sasl-mech    select
+nslcd   nslcd/ldap-sasl-authzid string
+libnss-ldapd    libnss-ldapd/clean_nsswitch     boolean false
+libnss-ldapd:amd64      libnss-ldapd/clean_nsswitch     boolean false
+libnss-ldapd    libnss-ldapd/nsswitch   multiselect     passwd, group, shadow
+libnss-ldapd:amd64      libnss-ldapd/nsswitch   multiselect     passwd, group, shadow

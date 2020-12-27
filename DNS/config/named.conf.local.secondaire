@@ -1,0 +1,11 @@
+zone "cyberus.fr" {
+    type slave;
+    file "/var/cache/bind/db.cyberus.fr";
+    masters { 10.0.0.53; };
+};
+
+zone "0.0.10.in-addr.arpa" {
+    type slave;
+    file "/var/cache/bind/rev.cyberus.fr";
+    masters { 10.0.0.53; };
+};
