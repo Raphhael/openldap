@@ -1,0 +1,24 @@
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     ns2.cyberus.fr. admin.cyberus.fr. (
+                              4         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+
+@       IN      NS      ns1.cyberus.fr.
+@       IN      NS      ns2.cyberus.fr.
+
+ns1     IN      A       10.0.0.54
+ns2     IN      A       10.0.0.53
+@       IN      A       10.0.0.10
+ldap    IN      A       10.0.0.10
+
+; FAKE
+www     IN      A       10.0.0.2
+mail1   IN      MX  10  10.0.0.3
+mail2   IN      MX  20  10.0.0.4

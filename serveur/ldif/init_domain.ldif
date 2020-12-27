@@ -1,0 +1,20 @@
+# dcObject, organization défini dans:  nano schema/core.schema
+# DcObject is an AUXILIARY object class permits the dc attribute to be present in an LDAP Entry.
+
+dn: dc=cyberus,dc=fr
+changetype: add
+objectClass: dcObject
+objectClass: organization
+o: Raphael cyberus, Inc.
+dc: cyberus
+description: Mon domain<CR>a moi
+ contient plein d'informations privées.
+
+
+dn: cn=admin,dc=cyberus,dc=fr
+changetype: add
+cn: admin
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+userPassword: admincyberus
+

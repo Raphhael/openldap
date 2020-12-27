@@ -1,0 +1,13 @@
+# mdp : azerty
+# slappasswd -s azerty
+dn: olcDatabase={1}mdb,cn=config
+changetype: modify
+replace: olcSuffix
+olcSuffix: dc=cyberus,dc=fr
+-
+replace: olcRootDN
+olcRootDN: cn=admin,dc=cyberus,dc=fr
+-
+replace: olcRootPW
+olcRootPW: {SSHA}Ks3TxI0eq4ugrtkgwE83tcCYkrPKT32t
+

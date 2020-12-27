@@ -1,0 +1,84 @@
+
+# OU : nano /etc/ldap/schema/core.schema
+# -------------------------------------------- First level : ORGANISATIONAL UNIT
+# . > PEOPLE
+dn: ou=People,dc=cyberus,dc=fr
+objectClass: organizationalUnit
+ou: People
+description: Liste des utilisateurs
+
+# . > GROUPS
+dn: ou=Groups,dc=cyberus,dc=fr
+objectClass: organizationalUnit
+ou: Groups
+description: Liste des Groupes
+
+
+# -------------------------------------------- Second level
+# . > GROUPS > STUDENT
+dn: cn=Commercial,ou=Groups,dc=cyberus,dc=fr
+objectClass: posixGroup
+cn: Commercial
+gidNumber: 5000
+
+dn: cn=Marketing,ou=Groups,dc=cyberus,dc=fr
+objectClass: posixGroup
+cn: Marketing
+gidNumber: 5001
+
+
+# inetOrgPerson : /etc/ldap/schema/inetorgperson.schema
+# shadow, posix : /etc/ldap/schema/nis.schema
+# . > PEOPLE > STUDENT > RENATUS
+dn: uid=renatus,ou=People,dc=cyberus,dc=fr
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: Renatus
+uid: renatus
+uidNumber: 10000
+gidNumber: 5000
+homeDirectory: /home/renatus
+loginShell: /bin/bash
+sn: Renatus
+givenName: cyberus
+displayName: User 1 (renatus)
+userPassword: {MD5}q09j+axlFSV1iGhg3eSAoQ==
+mail: renatus@cyberus.fr
+
+
+dn: uid=enigmus,ou=People,dc=cyberus,dc=fr
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: inetOrgPerson
+cn: Enigmus
+uid: enigmus
+uidNumber: 10001
+sn: Enigmus
+gidNumber: 5000
+homeDirectory: /home/enigmus
+userPassword: {SSHA}94DS9pZ3eXmSimrCrqOKZzXjA5wkhq2Y
+
+dn: uid=certus,ou=People,dc=cyberus,dc=fr
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: inetOrgPerson
+cn: certus
+uid: certus
+sn: Certus
+uidNumber: 10002
+gidNumber: 5001
+homeDirectory: /home/marketing
+userPassword: {CRYPT}$1$G7M5694z$bmTBZ11cP2415kXkr5tfI.
+
+dn: uid=anus,ou=People,dc=cyberus,dc=fr
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: inetOrgPerson
+cn: anus
+uid: anus
+sn: Anus
+uidNumber: 10003
+gidNumber: 5001
+homeDirectory: /home/marketing
+userPassword: {CRYPT}$5$Sn1cVBR9OLHUEWDM$v7xw9AI0IPVVpspjb3fiNv.AGRmfAD/blLGZteR/Rd0

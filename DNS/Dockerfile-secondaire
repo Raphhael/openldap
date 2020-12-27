@@ -1,0 +1,27 @@
+FROM debian:stable-slim
+
+RUN apt-get update && apt-get install -y bind9 bind9utils bind9-doc
+
+# Pour activer l'IPv4
+RUN sed -i 's/OPTIONS=.*/OPTIONS="-4 -u bind"/' /etc/default/bind9
+
+
+COPY ./config/named.conf.local.secondaire      /etc/bind/named.conf.local
+COPY ./config/named.conf.options.secondaire      /etc/bind/named.conf.options
+
+
+# Génération de rndc.key
+# On met les bons droits, propriétaires, groupes aux fichiers de configuration
+# On vérifie la configuration et la/les zones avec les outils named-*
+RUN rndc-confgen -a \
+    && chown -R root:bind /etc/bind \
+    && chmod -R 770 /etc/bind \
+    && chown -R bind:bind /var/cache/bind/ \
+    && chmod -R 770 /var/cache/bind \
+    && named-checkconf /etc/bind/named.conf
+
+EXPOSE 53/udp 53/tcp
+
+# Lancer le serveur DNS et garder le container running 
+CMD service bind9 start \
+    && bash -c "while :; do sleep 1; done"

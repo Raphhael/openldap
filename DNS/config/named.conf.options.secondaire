@@ -1,0 +1,14 @@
+options {
+    directory "/var/cache/bind";
+
+    listen-on { any; };
+    
+    allow-notify { 10.0.0.53; };
+
+    forwarders {
+            8.8.8.8;
+            8.8.4.4;
+    };
+    
+    version none;
+};

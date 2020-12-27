@@ -1,0 +1,13 @@
+zone "cyberus.fr" {
+    type master;
+    notify yes;
+    file "db.cyberus.fr";
+    allow-transfer { 10.0.0.54; };
+};
+
+zone "0.0.10.in-addr.arpa" {
+    type master;
+    notify yes;
+    file "rev.cyberus.fr";
+    allow-transfer { 10.0.0.54; };
+};
